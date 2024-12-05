@@ -1,0 +1,255 @@
+<body >
+    <main>
+        <div class="ventana">
+            <div class="titulo">
+                <h2>Tornillo de potencia</h2>
+            </div>
+            <div class="imgprod"><img class="btn_engrane" src="../../../assets/menu2.png" alt="Engrane"></div>
+            <!-- ajustar elementos como modal para mostrar informacion -->
+        </div>
+    </main>
+
+    <div>
+        <!-- tornillos de potencia -->
+        <form #form_potencia="ngForm" class="row g-3 needs-validation">
+            <h5 class="pos_h3"> Cálculo tornillos de potencia.</h5>
+            <div class="col-md-3">
+                <div class="form-floating ">
+                    <input type="text" class="form-control" [(ngModel)]="diam_Mayor" name="Tor_pot" ngModel
+                        #Tor_pot="ngModel" #_Tor_pot filtrarNumeros placeholder="Diametro Tornillo [mm]" required>
+                    <label for="floatingInput"><b>Diametro Tornillo [mm]</b></label>
+                </div>
+                <div *ngIf="Tor_pot.invalid && (Tor_pot.dirty || Tor_pot.touched)" class="my-2 alert alert-danger">
+                    <div *ngIf="Tor_pot.errors?.['required']">
+                        <b>Campo Obligatorio.</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating ">
+                    <input type="text" class="form-control" [(ngModel)]="num_entradas" name="Numero_entradas" ngModel
+                        #Numero_entradas="ngModel" filtrarNumeros placeholder="Número entradas Tornillo" required>
+                    <label for="floatingInput"><b>Número entradas Tornillo</b> </label>
+                </div>
+                <div *ngIf="Numero_entradas.invalid && (Numero_entradas.dirty || Numero_entradas.touched)"
+                    class="my-2 alert alert-danger">
+                    <div *ngIf="Numero_entradas.errors?.['required']">
+                        <b>Campo Obligatorio</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating ">
+                    <input type="text" class="form-control" [(ngModel)]="f_compresion" name="Fuerza_comp" ngModel
+                        #Fuerza_comp="ngModel" filtrarNumeros placeholder="Fuerza Compresion F [kn]" required>
+                    <label for="floatingInput"><b>Fuerza Compresion F [kn]</b> </label>
+                </div>
+                <div *ngIf="Fuerza_comp.invalid && (Fuerza_comp.dirty || Fuerza_comp.touched)"
+                    class="my-2 alert alert-danger">
+                    <div *ngIf="Fuerza_comp.errors?.['required']">
+                        <b>Campo Obligatorio</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating ">
+                    <input type="text" class="form-control" [(ngModel)]="Coef_friccion" name="friccion" ngModel
+                        #friccion="ngModel" filtrarNumeros placeholder="Coeficiente friccion f" required>
+                    <label for="floatingInput"><b>Coeficiente friccion f</b> </label>
+                </div>
+                <div *ngIf="friccion.invalid && (friccion.dirty || friccion.touched)" class="my-2 alert alert-danger">
+                    <div *ngIf="friccion.errors?.['required']">
+                        <b>Campo Obligatorio</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- mostrar datos tornillos de potencia-->
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" [(ngModel)]="paso_tornillo" name="paso_T" ngModel
+                    #paso_T="ngModel" filtrarNumeros placeholder="Paso [mm]" disabled>
+                <label>Paso [mm] </label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" [(ngModel)]="espesor" name="Espesor" ngModel #Espesor="ngModel"
+                    filtrarNumeros placeholder="Espesor Filete e [mm]" disabled>
+                <label>Espesor Filete e [mm]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" [(ngModel)]="altura" name="Altura" ngModel #Altura="ngModel"
+                    filtrarNumeros placeholder="Altura Filete h [mm]" disabled>
+                <label>Altura Filete h [mm]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" [(ngModel)]="dr_interno" name="Interno" ngModel
+                    #Interno="ngModel" filtrarNumeros placeholder="Ø Interno Dr [mm]" disabled>
+                <label>Ø Interno Dr [mm] </label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" [(ngModel)]="dm_medio" name="Medio" ngModel #Medio="ngModel"
+                    filtrarNumeros placeholder="Ø Medio Dm [mm]" disabled>
+                <label>Ø Medio Dm [mm]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Ángulo de la Hélice del tornillo para el Buril"
+                    [(ngModel)]="helice" name="Ang_helice" ngModel #Ang_helice="ngModel"
+                    placeholder="Ángulo Hélice (Buril)" disabled>
+                <label>Ángulo Hélice (Buril)</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" [(ngModel)]="avance" name="Avance_l" ngModel #Avance_l="ngModel"
+                    placeholder="Avance L [mm]" disabled>
+                <label>Avance L [mm]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Eficiencia global al elevar la carga"
+                    [(ngModel)]="eficiencia" name="Efi" ngModel #efi="ngModel" placeholder="Eficiencia" disabled>
+                <label>Eficiencia (Tornillo + Collarín)</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Par de torsión para subir la carga" [(ngModel)]="Tr"
+                    name="TorD" ngModel #TorD="ngModel" placeholder="Torsión Derecha [Nm] " disabled>
+                <label>Torsión Derecha [Nm] </label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Par de torsión para bajar la carga" [(ngModel)]="Tl"
+                    name="tor_Izq" ngModel #tor_izq="ngModel" placeholder="Torsión Izquierda [Nm]" disabled>
+                <label>Torsión Izquierda [Nm] </label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control"
+                    title="Esfuerzo cortante en el cuerpo τ, debido al momento de torsión TR" [(ngModel)]="Esf_cort"
+                    name="Esfuerzo" ngModel #Esfuerzo="ngModel" placeholder="Esfuerzo cortante relación al TR [Mpa]"
+                    disabled>
+                <label>τ Esfuerzo cortante relación al TR [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Esfuerzo axial normal nominal σ [Mpa]"
+                    [(ngModel)]="Esf_axial" name="Axial" ngModel #Axial="ngModel"
+                    placeholder="σ Esfuerzo axial normal [Mpa]" disabled>
+                <label>σ Esfuerzo axial normal [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Esfuerzo de apoyo σB,en la 1° rosca que soporta 0.38F"
+                    [(ngModel)]="Esf_apoyo38" name="apoyo" ngModel #apoyo="ngModel"
+                    placeholder="Esf apoyo σB, 1° rosca soporta 0.38F" disabled>
+                <label>Esf apoyo σB, 1° rosca [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Esfuerzo de apoyo σB,en la 2° rosca que soporta 0.25F"
+                    [(ngModel)]="Esf_apoyo25" name="apoyo25" ngModel #apoyo25="ngModel"
+                    placeholder="Esf apoyo σB, 2° rosca soporta 0.38F" disabled>
+                <label>Esf apoyo σB, 2° rosca [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control" title="Esfuerzo de apoyo σB,en la 3° rosca que soporta 0.18F"
+                    [(ngModel)]="Esf_apoyo18" name="apoyo18" ngModel #apoyo18="ngModel"
+                    placeholder="Esf apoyo σB, 3° rosca soporta 0.38F" disabled>
+                <label>Esf apoyo σB, 3° rosca [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control"
+                    title="Esfuerzo flexionante de la raíz de la rosca σb, en la 1° rosca que soporta 0.38F"
+                    [(ngModel)]="Flexion38" name="esf_fex38" ngModel #esf_fex38="ngModel"
+                    placeholder="Esf flexionante raíz de la rosca σb 1° rosca soporta 0.38F<" disabled>
+                <label>Esf flexionante raíz 1° rosca [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control"
+                    title="Esfuerzo flexionante de la raíz de la rosca σb, en la 2° rosca que soporta 0.25F"
+                    [(ngModel)]="Flexion25" name="esf_fex25" ngModel #esf_fex25="ngModel"
+                    placeholder="Esf flexionante raíz de la rosca σb 2° rosca soporta 0.25F" disabled>
+                <label>Esf flexionante raiz 2° rosca [Mpa]</label>
+            </div>
+            <div class="form-floating col-md-3">
+                <input type="text" class="form-control"
+                    title="Esfuerzo flexionante de la raíz de la rosca σb, en la 3° rosca que soporta 0.18F"
+                    [(ngModel)]="Flexion18" name="esf_fex18" ngModel #esf_fex18="ngModel"
+                    placeholder="Esf flexionante raíz de la rosca σb 3° rosca soporta 0.18F" disabled>
+                <label>Esf flexionante raiz 3° rosca [Mpa]</label>
+            </div>
+            <!-- Cálculo Collarín -->
+            <h5> Cálculo Collarín.</h5>
+            <div class="col-md-6">
+                <div class="form-floating ">
+                    <input type="text" class="form-control" [(ngModel)]="Fc" name="fc_collarin" ngModel
+                        #fc_collarin="ngModel" filtrarNumeros placeholder="" required>
+                    <label for="floatingInput"><b>Coeficiente fricción collarín fc</b></label>
+                </div>
+                <div *ngIf="fc_collarin.invalid && (fc_collarin.dirty || fc_collarin.touched)"
+                    class="my-2 alert alert-danger">
+                    <div *ngIf="fc_collarin.errors?.['required']">
+                        <b>Campo Obligatorio.</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating ">
+                    <input type="text" class="form-control" [(ngModel)]="Dc_collarin" name="collarin_dc" ngModel
+                        #collarin_dc="ngModel" filtrarNumeros placeholder="" required>
+                    <label for="floatingInput"><b>Diámetro medio collarín dc [mm]</b></label>
+                </div>
+                <div *ngIf="collarin_dc.invalid && (collarin_dc.dirty || collarin_dc.touched)"
+                    class="my-2 alert alert-danger">
+                    <div *ngIf="collarin_dc.errors?.['required']">
+                        <b>Campo Obligatorio.</b>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating col-md-4">
+                <input type="text" class="form-control" title="Par de Torsión del Collarín" [(ngModel)]="Tc" name="TC"
+                    ngModel #TC="ngModel" placeholder="Torsión Collarín tc [Nm]" disabled>
+                <label>Torsión Collarín tc [Nm]</label>
+            </div>
+            <div class="form-floating col-md-4">
+                <input type="text" class="form-control" title="Par de torsión que se requiere
+                para hacer girar el tornillo contra la carga" [(ngModel)]="Tr_tc" name="torsion_tl" ngModel
+                    #Torsion_tl="ngModel" placeholder="Torsión Der + collarín elevar carga TR [Nm]" disabled>
+                <label>Torsión Der + collarín elevar carga TR [Nm]</label>
+            </div>
+            <div class="form-floating col-md-4">
+                <input type="text" class="form-control" title="Par de torsión para bajar la carga" [(ngModel)]="Tl_tc"
+                    name="Torsion_izq" ngModel #Torsion_izq="ngModel"
+                    placeholder="Torsión Izq + collarín bajar carga TL [Nm]" disabled>
+                <label>Torsión Izq + collarín bajar carga TL [Nm]</label>
+            </div>
+            <!-- Cálculo Tuerca. -->
+            <h5> Cálculo Tuerca.</h5>
+            <div class="form-floating col-md-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" [(ngModel)]="tolerancia_vano" name="van_tuerca" ngModel
+                        #van_tuerca="ngModel" #_van_tuerca filtrarNumeros placeholder="tolerancia espesor vano (mm)"
+                        min="0.05" max="0.10" required>
+                    <label class="form-label"><b>Tolerancia vano tuerca [mm]</b> </label>
+                    <div *ngIf="van_tuerca.invalid && (van_tuerca.dirty || van_tuerca.touched)"
+                        class="my-2 alert alert-danger">
+                        <div *ngIf="van_tuerca.errors?.['required']">
+                            <b>Campo Obligatorio</b>
+                        </div>
+                        <div *ngIf="van_tuerca.errors?.['min']">
+                            <b>Valor mayor o igual a 0.05 </b>
+                        </div>
+                        <div *ngIf="van_tuerca.errors?.['max']">
+                            <b>Valor menor o igual a 0.10</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating col-md-4">
+                <input type="text" class="form-control" title="Diámetro a tornear D' [mm]" [(ngModel)]="tornear_D"
+                    name="Tornear" ngModel #Tornear="ngModel" placeholder="Diámetro a tornear D' [mm]" disabled>
+                <label>Diámetro a tornear D' [mm]</label>
+            </div>
+            <div class="form-floating col-md-4">
+                <input type="text" class="form-control" title="Espesor del vano e' [mm]" [(ngModel)]="vano_tuerca"
+                    name="vano" ngModel #vano="ngModel" placeholder="Espesor del vano e' [mm]" disabled>
+                <label>Espesor del vano e' [mm]</label>
+            </div>
+            <div>
+                <button class="btn btn-primary my-2 mx-2"
+                    title="Completar todos los espacios en blanco para habilitar el botón calcular"
+                    [disabled]="!form_potencia.valid" (click)="Calcular_tornillo()" type="submit">Cálcular </button>
+            </div>
+        </form>
+    </div>
+</body>

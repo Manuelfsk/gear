@@ -1,0 +1,209 @@
+
+    <main>
+        <div class="ventana">
+            <div class="titulo">
+                <h2>Transmisión de movimiento eje perpendicular</h2>
+            </div>
+            <div class="imgprod"><img class="btn_engrane" src="../../../assets/menu2.png" alt="Engrane"></div>
+        </div>
+    </main>
+
+    <!-- Engrane Cónico -->
+    <form #form_EngConico="ngForm" class="row g-3 needs-validation">
+        <h5 class="pos_h3"> Engrane Cónico</h5>
+        <div class="col-md-3">
+            <div class="form-floating ">
+                <input type="text" class="form-control" [(ngModel)]="Modulo_cono" name="M_conot" ngModel
+                    #M_conot="ngModel" #_M_conot filtrarNumeros placeholder="Módulo [mm]" required>
+                <label for="floatingInput"><b>Módulo [mm]</b></label>
+            </div>
+            <div *ngIf="M_conot.invalid && (M_conot.dirty || M_conot.touched)" class="my-2 alert alert-danger">
+                <div *ngIf="M_conot.errors?.['required']">
+                    <b>Campo Obligatorio.</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating ">
+                <input type="text" class="form-control" [(ngModel)]="Dientes_cono" name="Dientes_conico" ngModel
+                    #Dientes_conico="ngModel" #_Dientes_conico filtrarNumeros placeholder="N N° Dientes" required>
+                <label for="floatingInput"><b>N Número Dientes</b></label>
+            </div>
+            <div *ngIf="Dientes_conico.invalid && (Dientes_conico.dirty || Dientes_conico.touched)"
+                class="my-2 alert alert-danger">
+                <div *ngIf="Dientes_conico.errors?.['required']">
+                    <b>Campo Obligatorio.</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating ">
+                <input type="number" min="15" max="50" title="Ángulo presio recomendable 20° a 25° " class="form-control" [(ngModel)]="angulo_pre" name="A_presion" ngModel
+                    #A_presion="ngModel" #_A_presion filtrarNumeros placeholder="φ Ángulo presión" required>
+                <label for="floatingInput"><b>φ Ángulo presión</b></label>
+            </div>
+            <div *ngIf="A_presion.invalid && (A_presion.dirty || A_presion.touched)" class="my-2 alert alert-danger">
+                <div *ngIf="A_presion.errors?.['required']">
+                    <b>Campo Obligatorio.</b>
+                </div>
+                <div *ngIf="A_presion.errors?.['min']">
+                    <b>Valor mínimo 15</b>
+                </div>
+                <div *ngIf="A_presion.errors?.['max']">
+                    <b>Valor máximo 50 </b>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-floating ">
+                <input type="number" min="0.8" max="1" title="Constante de profundida 1 diente completo " class="form-control"
+                    title="K; 1: profundidad completa del deinte, 0.8 profundidad parcial" [(ngModel)]="k_cono"
+                    name="cte_cono" ngModel #cte_cono="ngModel" filtrarNumeros placeholder="cte
+                        " required>
+                <label><b>K profundidad</b></label>
+            </div>
+            <div *ngIf="cte_cono.invalid && (cte_cono.dirty || cte_cono.touched)" class="my-2 alert alert-danger">
+                <div *ngIf="cte_cono.errors?.['required']">
+                    <b>Campo Obligatorio.</b>
+                </div>
+                <div *ngIf="cte_cono.errors?.['min']">
+                    <b>Valor mínimo 0.8</b>
+                </div>
+                <div *ngIf="cte_cono.errors?.['max']">
+                    <b>Valor máximo 1 </b>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="P=  M * pi" [(ngModel)]="p_cono" name="paso" ngModel
+                #paso="ngModel" filtrarNumeros placeholder="Paso" disabled>
+            <label>P Paso [mm] </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Dp= M *N" [(ngModel)]="Dp_cono" name="Dp" ngModel
+                #Dp="ngModel" filtrarNumeros placeholder="Diámetro primitivo" disabled>
+            <label>Dp Diámetro primitivo [mm] </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="De = (2M*cos α1) +Dp" [(ngModel)]="De_cono" name="De" ngModel
+                #De="ngModel" filtrarNumeros placeholder="Diámetro exterior" disabled>
+            <label>De Diámetro exterior [mm] </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="tan α1 = N /n" [(ngModel)]="ang_primitivo"
+                name="ag_primitivo" ngModel #ag_primitivo="ngModel" filtrarNumeros placeholder="Ángulo primitivo"
+                disabled>
+            <label>α1 Ángulo primitivo </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="tan β1= 2 * seno α1 /N" [(ngModel)]="ang_cabeza"
+                name="cabeza" ngModel #cabeza="ngModel" filtrarNumeros placeholder="β1 Ángulo cabeza diente" disabled>
+            <label>β1 Ángulo cabeza diente </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Γ1 =  90/raíz(N^2 +n^2)" [(ngModel)]="ang_pie" name="pie"
+                ngModel #pie="ngModel" filtrarNumeros placeholder="Γ1 Ángulo pie" disabled>
+            <label>Γ1 Ángulo pie </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="AT = α1 - Γ1" [(ngModel)]="ang_talla" name="talla" ngModel
+                #talla="ngModel" filtrarNumeros placeholder="At Ángulo talla" disabled>
+            <label>At Ángulo talla </label>
+        </div>
+    </form>
+    <!-- Engrane Piñon Cónico -->
+    <form #form_Pinon_Conico class="row g-3 needs-validation">
+        <h5 class="pos_h3"> Engrane Piñón Cónico</h5>
+        <div class="col-md-3">
+            <div class="form-floating ">
+                <input type="text" class="form-control" [(ngModel)]="Dientes_pnn" name="D_pinon" ngModel
+                    #D_pinon="ngModel" #_D_pinon filtrarNumeros placeholder="N N° Dientes" required>
+                <label for="floatingInput"><b>N Número Dientes</b></label>
+            </div>
+            <div *ngIf="D_pinon.invalid && (D_pinon.dirty || D_pinon.touched)" class="my-2 alert alert-danger">
+                <div *ngIf="D_pinon.errors?.['required']">
+                    <b>Campo Obligatorio.</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-floating ">
+                <input type="text" class="form-control" Title="Valor en rpm o revoluciones" [(ngModel)]="rpm" name="revoluciones" ngModel
+                    #revoluciones="ngModel" #_revoluciones filtrarNumeros placeholder="Módulo [mm]" required>
+                <label for="floatingInput"><b>Rpm o Revoluciones</b></label>
+            </div>
+            <div *ngIf="revoluciones.invalid && (revoluciones.dirty || revoluciones.touched)" class="my-2 alert alert-danger">
+                <div *ngIf="revoluciones.errors?.['required']">
+                    <b>Campo Obligatorio.</b>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="P=  M * pi" [(ngModel)]="p_pnn" name="paso" ngModel
+                #paso="ngModel" filtrarNumeros placeholder="Paso" disabled>
+            <label>P Paso [mm] </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Dp= M *N" [(ngModel)]="Dpvo_pnn" name="Dp" ngModel
+                #Dp="ngModel" filtrarNumeros placeholder="Diámetro primitivo" disabled>
+            <label>Dp Diámetro primitivo [mm] </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="De = (2M*cos α1) +Dp" [(ngModel)]="De_pnn" name="De" ngModel
+                #De="ngModel" filtrarNumeros placeholder="Diámetro exterior" disabled>
+            <label>De Diámetro exterior [mm] </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="tan α1 = N /n" [(ngModel)]="ang_primitivo_pnn"
+                name="ag_primitivo" ngModel #ag_primitivo="ngModel" filtrarNumeros placeholder="Ángulo primitivo"
+                disabled>
+            <label>α1 Ángulo primitivo </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="tan β1= 2 * seno α1 /N" [(ngModel)]="ang_cabeza_pnn"
+                name="cabeza" ngModel #cabeza="ngModel" filtrarNumeros placeholder="β1 Ángulo cabeza diente" disabled>
+            <label>β1 Ángulo cabeza diente </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Γ1 =  90/raíz(N^2 +n^2)" [(ngModel)]="ang_pie_pnn" name="pie"
+                ngModel #pie="ngModel" filtrarNumeros placeholder="Γ1 Ángulo pie" disabled>
+            <label>Γ1 Ángulo pie </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="AT = α1 - Γ1" [(ngModel)]="ang_talla_pnn" name="talla"
+                ngModel #talla="ngModel" filtrarNumeros placeholder="At Ángulo talla" disabled>
+            <label>At Ángulo talla </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Rt = Zp /Ze" [(ngModel)]="Rt_engrane"
+                name="Relación de transmisión" ngModel #espacio="ngModel" placeholder="Relación de transmisión"
+                disabled>
+            <label>Rt Relación de transmisión {{Rt_engrane}}</label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="V = (zp / ze)*rpm o rel" [(ngModel)]="vel_engrane"
+                name="Velocidad del engrane" ngModel #espacio="ngModel" filtrarNumeros
+                placeholder="Velocidad del engrane" disabled>
+            <label>V Velocidad del engrane </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Ng=(Np^2*seno^2(φ)- 4k^2)/(4k - 2*Np *seno^2(φ))" [(ngModel)]="Ng"
+                name="Ng_especificado" ngModel #Ng_especificado="ngModel" filtrarNumeros
+                placeholder="Ng" disabled>
+            <label>Ng mayor engrane </label>
+        </div>
+        <div class="form-floating col-md-3">
+            <input type="text" class="form-control" title="Np= (2k/ 3*seno^2(φ))*1+raíz(1 + 3*seno^2 (φ))" [(ngModel)]="Np"
+                name="Np_piñón" ngModel #Np_piñón="ngModel" filtrarNumeros
+                placeholder="Velocidad del engrane" disabled>
+            <label>Np Número deintes piñón sin interferencia </label>
+        </div>
+        <div>
+            <button class="btn btn-primary my-2 mx-2"
+                title="Completar todos los espacios en blanco para habilitar el botón calcular"
+                (click)="Engrane_conico() " [disabled]="!form_EngConico.form.valid" type="submit">Cálcular
+                Piñon
+            </button>
+        </div>
+    </form>
