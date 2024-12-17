@@ -13,6 +13,8 @@ export class DashboardComponent {
       this.startmenu = false
       let mimenu:any = document.getElementById("mimenu")
       mimenu.style.display = 'none'
+      var cuerop_body:any = document.getElementById("cuerpo_body")
+      cuerop_body.style.marginRight = "10px"
       
     }else{
       this.startmenu= true
